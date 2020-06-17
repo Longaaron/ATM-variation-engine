@@ -1,18 +1,38 @@
 package com.atm.main;
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+
 
 public class ATM {
+
+	public static void main(String[] args) throws IOException {
+	    Scanner sc = new Scanner(new File("myfile.txt"));
+	    sc.useDelimiter("");
+	    while (sc.hasNext()) {
+	      String s = sc.next();
+	      if (s.trim().isEmpty()) {
+	        continue;
+	      }
+	      System.out.println(s);
+	    }
+	    sc.close();
+	  }
+
+	
+	
+	/*
     static Scanner keyboard = new Scanner(System.in);
     static String accountNumber, pin, result;
     static double oldBalance, newBalance, deposit, withdraw, currentBalance, atmCurrentFunds;
     static int choose;
-
+ 
 
     
     public static void main(String[] args) {
 
-        /*for (int run = 0; run < 3; run++) {
+        for (int run = 0; run < 3; run++) {
             System.out.println("Enter your account number");
             accountNumber = keyboard.nextLine();
             System.out.println("Enter your account pin");
@@ -26,7 +46,7 @@ public class ATM {
                 return;
             }
         }
-        */
+        
         menu();
     }
     
@@ -106,4 +126,7 @@ public class ATM {
         System.out.println("Amount requested exceeds ATM current funds, Please try again with a smaller amount");
         }
     }
+    */
 }
+
+
