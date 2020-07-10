@@ -3,7 +3,7 @@ package com.atm.datamodel;
 public class UserAccount {
 	
 	String accountNumber;
-	int accountPin;
+	String accountPin;
 	int balance;
 	int overDraft;
 	
@@ -13,11 +13,11 @@ public class UserAccount {
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public int getAccountPin() {
+	public String getAccountPin() {
 		return accountPin;
 	}
-	public void setAccountPin(int accountPin) {
-		this.accountPin = accountPin;
+	public void setAccountPin(String correctPin) {
+		this.accountPin = correctPin;
 	}
 	public int getBalance() {
 		return balance;

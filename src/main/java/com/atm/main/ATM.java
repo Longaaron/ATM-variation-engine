@@ -21,8 +21,8 @@ public class ATM {
 		
 		//CommandLine commandLineArgs = this.parseCommandlineoptions(args);
 		String fileName = args[0];
-		ATMTotalCash atmTC = new ATMTotalCash();
-		ATMTransaction details = new ATMTransaction ();
+		AtmTotalAmount atmTC = new AtmTotalAmount();
+		UserSession details = new UserSession ();
 		ATMOverdraft overdraft = new ATMOverdraft();
 		ATMBalance bal = new ATMBalance();
 		ATMWithdrawal w = new ATMWithdrawal();	
@@ -33,6 +33,8 @@ public class ATM {
 	    String pattern3 = "[0-9]{3} [0-1]{3}";
 	    String pattern4 = "B";
 	    String pattern5 = "W [0-9]{3}";
+	    
+	 
 	    
 
 		// while loop to be inserted here to go through file and call the correct classes at each line
@@ -46,10 +48,11 @@ public class ATM {
 		        	 if(line.matches(pattern1)){
 		        		 atmTC.atmTransaction(line);
 		        		 int balance = Integer.parseInt(line);
-		        		 atmMachine.setBalance(balance);
-		        	 }
+		        		 atmMachine.setBalance(balance); //here is where balance is set originally but once you try set and get it in other 
+		        	 }                                   // else if blocks they dont get the value or read a different (line) from the file
 		        	 else if(line.matches(pattern2)){
-		        		 details.accountDetails(line);
+		        		 atmMachine.setBalance(balance);
+		        		 details.accountDetails(line, balance);		        		
 		        	 }
 		        	 else if(line.matches(pattern3)){
 		        		 overdraft.draft(line);
