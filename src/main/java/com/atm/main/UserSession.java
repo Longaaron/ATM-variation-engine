@@ -24,14 +24,18 @@ public class UserSession {
          String userEnteredPin = userDetail[2];
 
         
-        		 
-         if(correctPin.matches(userEnteredPin)) { // loop balance,withdraw and change to user session            		       	
+        	
+      // loop balance,withdraw and change to user session   
+         
+         if(correctPin.matches(userEnteredPin)) {          		       	
         	 userAccount.setAccountNumber(atmAccountDetail);
         	 userAccount.setAccountPin(correctPin);   
         	 
-        	 atmMachine.getBalance();
+        	 atmMachine.setBalance(balance);
         	 
-        	 System.out.println(balance);
+        	  
+        	 
+        	System.out.println(balance + atmMachine.getBalance());
     		 
          }else{
              System.out.println("Pin you have entered is incorrect");

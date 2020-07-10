@@ -33,37 +33,38 @@ public class ATM {
 	    String pattern3 = "[0-9]{3} [0-1]{3}";
 	    String pattern4 = "B";
 	    String pattern5 = "W [0-9]{3}";
-	    
-	 
-	    
 
 		// while loop to be inserted here to go through file and call the correct classes at each line
 		  try {	
 			  File f = new File(fileName);
 		      Scanner sc = new Scanner(f);
+		      Scanner scFirstLine = new Scanner(f);
 		      
-		      while(sc.hasNextLine()){ 
-		        	 String line = sc.nextLine();
-		        	 
-		        	 if(line.matches(pattern1)){
-		        		 atmTC.atmTransaction(line);
-		        		 int balance = Integer.parseInt(line);
-		        		 atmMachine.setBalance(balance); //here is where balance is set originally but once you try set and get it in other 
-		        	 }                                   // else if blocks they dont get the value or read a different (line) from the file
-		        	 else if(line.matches(pattern2)){
-		        		 atmMachine.setBalance(balance);
-		        		 details.accountDetails(line, balance);		        		
+		      String firstLine = scFirstLine.nextLine(); 
+		      
+		      if(firstLine.matches(pattern1)){
+	              int balance = Integer.parseInt(firstLine);
+	        	  atmMachine.setBalance(balance); 
+	        	  atmTC.atmTransaction(firstLine, balance); 
+		             
+	        	  while(sc.hasNextLine()) {   
+	        		  String line = sc.nextLine();
+	        		  
+		             if(line.matches(pattern2)){
+		        	   atmMachine.setBalance(balance);
+		        	   details.accountDetails(line, balance);	// possibly 3 arguements	        		
 		        	 }
 		        	 else if(line.matches(pattern3)){
-		        		 overdraft.draft(line);
+		        	   overdraft.draft(line);
 		        	 }
 		        	 else if(line.matches(pattern4)) {
-		        		 bal.balance(line);
+		        	   bal.balance(line);
 		        	 }
 		        	 else if(line.matches(pattern5)) {
-		        		 w.withDrawal(line);
+		        	   w.withDrawal(line);
 		        	 }
 		         }
+		      }
 		         sc.close();
 		         
 		     } catch (FileNotFoundException e) {         

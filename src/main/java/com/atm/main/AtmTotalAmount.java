@@ -10,7 +10,7 @@ import com.atm.datamodel.AtmMachine;
 
 public class AtmTotalAmount {
 	
-	public static void atmTransaction(String line) throws IOException
+	public static void atmTransaction(String line, int balance) throws IOException
 	{		
 		 AtmMachine atmMachine = new AtmMachine();
 		 String line1 = line;
@@ -22,9 +22,8 @@ public class AtmTotalAmount {
          int number = Integer.parseInt(atmCashValue[0]);
          atmTotal.add(number);  
           
-         int balance = Integer.parseInt(line);
-		 atmMachine.setBalance(balance);
+         atmMachine.setBalance(balance);
 		 
-		 System.out.println(atmMachine.getBalance());
+		//System.out.println(atmMachine.getBalance());
 	}
 }
