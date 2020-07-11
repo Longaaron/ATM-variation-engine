@@ -6,17 +6,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ATMBalance {
+public class AtmBalance {
 	
-	static int bal = 900; // needs to be saved and changed, just in for now
-	
-	public static void balance(String line) throws IOException
+	public static void balance(String line, int balance) throws IOException
 	{
 	     String line1 = line;
          String pattern = "B";
              
              if(line1.matches(pattern)) {
-            	 System.out.println(bal);
+            	 System.out.println(balance);
              }
              else {
             	 System.out.println(" "); // just for now

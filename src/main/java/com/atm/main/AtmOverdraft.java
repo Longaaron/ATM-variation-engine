@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ATMOverdraft {
+public class AtmOverdraft {
 	
-	public static void draft(String line) throws IOException
+	public static void draft(String line, int balance) throws IOException
 	{
 		 String line1 = line;
          

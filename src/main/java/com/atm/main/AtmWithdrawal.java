@@ -1,4 +1,4 @@
-package com.atm.main;
+/*package com.atm.main;  
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 import com.atm.common.AtmError;
 
-public class ATMWithdrawal {
+public class AtmWithdrawal {
 
-	public static void withDrawal(String line) throws IOException {
-		int atmBalance = 700;// have to call it from ATMTotalCash
+	public static void withDrawal(String line, int balance) throws IOException {
+		
 		int userMoney = 90;// TEMP
 
 		String line1 = line;
@@ -22,7 +22,6 @@ public class ATMWithdrawal {
 
 		int number = Integer.parseInt(withdrawalValue[1]);
 		userWithdrawal.add(number);
-		atmBalance -= number;
 
 		for (int w : userWithdrawal) {
 			if (w <= userMoney) {
@@ -36,3 +35,4 @@ public class ATMWithdrawal {
 		}
 	}
 }
+*/

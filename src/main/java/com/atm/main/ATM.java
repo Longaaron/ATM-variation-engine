@@ -7,6 +7,7 @@ import java.util.Scanner;
 import org.apache.commons.cli.CommandLine;
 
 import com.atm.datamodel.AtmMachine;
+import com.atm.datamodel.UserAccount;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,10 +24,11 @@ public class ATM {
 		String fileName = args[0];
 		AtmTotalAmount atmTC = new AtmTotalAmount();
 		UserSession details = new UserSession ();
-		ATMOverdraft overdraft = new ATMOverdraft();
-		ATMBalance bal = new ATMBalance();
-		ATMWithdrawal w = new ATMWithdrawal();	
+		AtmOverdraft overdraft = new AtmOverdraft();
+		AtmBalance bal = new AtmBalance();
+		//AtmWithdrawal w = new AtmWithdrawal();	
 		AtmMachine atmMachine = new AtmMachine();
+		UserAccount userAccount = new UserAccount();
 		
 		String pattern1 = "[0-9]{4}";
 	    String pattern2 = "[0-9]{8} [0-4]{4} [0-4]{4}";
@@ -52,17 +54,25 @@ public class ATM {
 	        		  
 		             if(line.matches(pattern2)){
 		        	   atmMachine.setBalance(balance);
-		        	   details.accountDetails(line, balance);	// possibly 3 arguements	        		
+		        	   String userAccountLine = sc.nextLine();   //works 
+		        	   
+		        	   String balButton = sc.nextLine();         // error for now
+		        	   String withdrawal = sc.nextLine();		        	   
+		        	   
+		        	   int userBalance = Integer.parseInt(userAccountLine);
+		        	   userAccount.setBalance(userBalance);
+		        	   
+		        	   details.accountDetails(line, balance, userBalance, balButton, withdrawal);	// possibly 3 arguements	        		
 		        	 }
 		        	 else if(line.matches(pattern3)){
-		        	   overdraft.draft(line);
+		        	   overdraft.draft(line, balance);
+		        	// }
+		        	// else if(line.matches(pattern4)) {
+		        	//   bal.balance(line, balance);
 		        	 }
-		        	 else if(line.matches(pattern4)) {
-		        	   bal.balance(line);
-		        	 }
-		        	 else if(line.matches(pattern5)) {
-		        	   w.withDrawal(line);
-		        	 }
+		        	// else if(line.matches(pattern5)) {
+		        	 //  w.withDrawal(line, balance);
+		        	// }
 		         }
 		      }
 		         sc.close();
