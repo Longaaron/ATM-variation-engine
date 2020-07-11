@@ -30,28 +30,9 @@ public class UserSession {
 			userAccount.setAccountNumber(atmAccountDetail);
 			userAccount.setAccountPin(correctPin);
 
-			if (balButton.matches("B") && userBalance != 0) {
+			if (balButton.matches("B"))// && userBalance != 0)
+			{
 				System.out.println(userBalance);
-			}
-			
-			if (balButton.contains("W ")) {
-				ArrayList<Integer> userWithdrawal = new ArrayList<Integer>();
-				String[] withdrawalValue = balButton.split("W ");
-				String withdrawalnumber = withdrawalValue[0];
-
-				int number = Integer.parseInt(withdrawalValue[1]);
-				userWithdrawal.add(number);
-
-				for (int w : userWithdrawal) {
-					if (w <= userBalance) {
-						int index = 1;
-						int total = userBalance - w;
-						System.out.println(total);
-						index++;
-					} else {
-						System.out.println(AtmError.FUNDS_ERR.getEnumDes());
-					}
-				}
 			}
 
 			if (withdrawal.contains("W")) {
@@ -73,6 +54,31 @@ public class UserSession {
 					}
 				}
 			}
+
+			if (balButton.contains("W ")) {
+				ArrayList<Integer> userWithdrawal = new ArrayList<Integer>();
+				String[] withdrawalValue = balButton.split("W ");
+				String withdrawalnumber = withdrawalValue[0];
+
+				int number = Integer.parseInt(withdrawalValue[1]);
+				userWithdrawal.add(number);
+
+				for (int w : userWithdrawal) {
+					if (w <= userBalance) {
+						int index = 1;
+						int total = userBalance - w;
+						System.out.println(total);
+						index++;
+					} else {
+						System.out.println(AtmError.FUNDS_ERR.getEnumDes());
+					}
+				}
+				
+				if(withdrawal.matches("B")) {
+					System.out.println(userBalance);
+				}
+			}
+		
 		} else {
 			System.out.println("Pin you have entered is incorrect");
 		}
