@@ -42,7 +42,7 @@ public class UserSession {
 
 				int number = Integer.parseInt(withdrawalValue[1]);
 				userWithdrawal.add(number);
-				
+
 				if (userBalance < balance) {
 					for (int w : userWithdrawal) {
 						if (w <= userBalance) {
@@ -53,13 +53,11 @@ public class UserSession {
 						} else {
 							System.out.println(AtmError.FUNDS_ERR.getEnumDes());
 						}
-					}	
-				} 
-				else
-				{
+					}
+				} else {
 					System.out.println(AtmError.ATM_ERR.getEnumDes());
 				}
-				
+
 			}
 
 			if (balButton.contains("W ")) {
@@ -70,7 +68,7 @@ public class UserSession {
 				int number = Integer.parseInt(withdrawalValue[1]);
 				userWithdrawal.add(number);
 
-				if (userBalance < balance) {			
+				if (userBalance < balance) {
 					for (int w : userWithdrawal) {
 						if (w <= userBalance) {
 							int index = 1;
@@ -81,8 +79,7 @@ public class UserSession {
 							System.out.println(AtmError.FUNDS_ERR.getEnumDes());
 						}
 					}
-				}else
-				{
+				} else {
 					System.out.println(AtmError.ATM_ERR.getEnumDes());
 				}
 
