@@ -56,7 +56,7 @@ public class ATM {
 		        	   atmMachine.setBalance(balance);
 		        	   String userAccountLine = sc.nextLine();   //works 
 		        	   
-		        	   String balButton = sc.nextLine();         // error for now
+		        	   String balButton = sc.nextLine();         
 		        	   String withdrawal = sc.nextLine();		        	   
 		        	   
 		        	   int userBalance = Integer.parseInt(userAccountLine);
