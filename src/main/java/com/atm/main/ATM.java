@@ -25,60 +25,99 @@ public class ATM {
 		UserSession details = new UserSession();
 		AtmOverdraft overdraft = new AtmOverdraft();
 		AtmBalance bal = new AtmBalance();
-		// AtmWithdrawal w = new AtmWithdrawal();
+	    //AtmWithdrawal withdrawal = new AtmWithdrawal();
 		AtmMachine atmMachine = new AtmMachine();
-		UserAccount userAccount = new UserAccount();
 
-		String pattern1 = "[0-9]{4}";
-		String pattern2 = "[0-9]{8} [0-4]{4} [0-4]{4}";
-		String pattern3 = "[0-9]{3} [0-1]{3}";
-		String pattern4 = "B";
-		String pattern5 = "W [0-9]{3}";
+		/*
+		 * String pattern1 = "[0-9]{4}"; String pattern2 = "[0-9]{8} [0-4]{4} [0-4]{4}";
+		 * String pattern3 = "[0-9]{3} [0-1]{3}"; String pattern4 = "B"; String pattern5
+		 * = "W [0-9]{3}";
+		 */
 
 		// while loop to be inserted here to go through file and call the correct
 		// classes at each line
 		try {
 			File f = new File(fileName);
 			Scanner sc = new Scanner(f);
-			Scanner scFirstLine = new Scanner(f);
+			Scanner atmSessionFile = new Scanner(f);
 
-			String firstLine = scFirstLine.nextLine();
+			String firstLine = atmSessionFile.nextLine();
 
-			if (firstLine.matches(pattern1)) {
-				int balance = Integer.parseInt(firstLine);
-				atmMachine.setBalance(balance);
-				atmTC.atmTransaction(firstLine, balance);
-
+			String[] firstLineValueArr = firstLine.split(" ");
+            // Identifies the first line of the file as the Atm balance
+			if (firstLineValueArr.length == 1) {
+				int atmBalance = Integer.parseInt(firstLineValueArr[0]); // try bl9ck
+				atmMachine.setBalance(atmBalance);
+                // Identifies the start of the User session
 				while (sc.hasNextLine()) {
 					String line = sc.nextLine();
+					String[] userSessionLineArr = line.split(" ");
 
-					if (line.matches(pattern2)) {
-						atmMachine.setBalance(balance);
-						String userAccountLine = sc.nextLine(); // works
+					if (userSessionLineArr.length == 3) {
+						UserAccount userAccount = new UserAccount();
+						userAccount.setAccountNumber(userSessionLineArr[0]);
+						userAccount.setAccountPin(userSessionLineArr[1]);
 
-						String balButton = sc.nextLine();
-						String withdrawal = sc.nextLine();
+						line = sc.nextLine();
+						String[] userBalanceArr = line.split(" ");
 
-						int userBalance = Integer.parseInt(userAccountLine);
-						userAccount.setBalance(userBalance);
+						if (userBalanceArr.length == 2) {
 
-						details.accountDetails(line, balance, userBalance, balButton, withdrawal); // possibly 3
-																									// arguements
-					} else if (line.matches(pattern3)) {
-						overdraft.draft(line, balance);
-						// }
-						// else if(line.matches(pattern4)) {
-						// bal.balance(line, balance);
+							int userBalance = Integer.parseInt(userBalanceArr[0]);
+							int userOverdraft = Integer.parseInt(userBalanceArr[1]);
+							
+							userAccount.setBalance(userBalance);
+							userAccount.setOverDraft(userOverdraft);
+							
+							while(sc.hasNextLine()) {
+								String userSessionline = sc.nextLine();
+								String[] userInteractionArr = userSessionline.split(" ");
+								
+								if(userInteractionArr[0].equals("B")) {
+									bal.balance(atmMachine, userAccount);									
+								}
+								else if(userInteractionArr[0].equals("W")) {
+									int withDrawalAmount = Integer.parseInt(userInteractionArr[1]);
+									
+									int newUserBalance = userAccount.getBalance() - withDrawalAmount;
+									int newAtmBalance = atmMachine.getBalance() - withDrawalAmount;
+									userAccount.setBalance(newUserBalance);
+									atmMachine.setBalance(newAtmBalance);
+									
+									System.out.println(userAccount.getBalance());
+									System.out.println(atmMachine.getBalance());																		
+								}
+							}
+						}
 					}
-					// else if(line.matches(pattern5)) {
-					// w.withDrawal(line, balance);
-					// }
 				}
+				sc.close();
 			}
-			sc.close();
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 }
+
+
+/*
+ * if (firstLine.matches(pattern1)) { int balance = Integer.parseInt(firstLine);
+ * atmMachine.setBalance(balance); atmTC.atmTransaction(firstLine, balance);
+ * 
+ * while (sc.hasNextLine()) { String line = sc.nextLine();
+ * 
+ * if (line.matches(pattern2)) { atmMachine.setBalance(balance); String
+ * userAccountLine = sc.nextLine(); // works
+ * 
+ * String balButton = sc.nextLine(); String withdrawal = sc.nextLine();
+ * 
+ * int userBalance = Integer.parseInt(userAccountLine);
+ * userAccount.setBalance(userBalance);
+ * 
+ * details.accountDetails(line, balance, userBalance, balButton, withdrawal); //
+ * possibly 3  arguements } else if (line.matches(pattern3)) {
+ * overdraft.draft(line, balance); // } // else if(line.matches(pattern4)) { //
+ * bal.balance(line, balance); } // else if(line.matches(pattern5)) { //
+ * w.withDrawal(line, balance); // } } }
+ */
+

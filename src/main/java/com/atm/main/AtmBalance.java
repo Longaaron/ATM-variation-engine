@@ -6,19 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.atm.datamodel.AtmMachine;
+import com.atm.datamodel.UserAccount;
+
 public class AtmBalance {
 	
-	public static void balance(String line, int balance) throws IOException
+	public static void balance(AtmMachine atmMachine, UserAccount userAccount) throws IOException
 	{
-	     String line1 = line;
-         String pattern = "B";
-             
-             if(line1.matches(pattern)) {
-            	 System.out.println(balance);
-             }
-             else {
-            	 System.out.println(" "); // just for now
-             }
-         }
-  	}
+            	 System.out.println(userAccount.getBalance());
+   	}
+}
 
