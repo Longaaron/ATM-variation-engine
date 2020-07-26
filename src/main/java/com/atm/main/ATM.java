@@ -26,15 +26,8 @@ public class ATM {
 		UserSession details = new UserSession();
 		AtmOverdraft overdraft = new AtmOverdraft();
 		AtmBalance bal = new AtmBalance();
-		// AtmWithdrawal withdrawal = new AtmWithdrawal();
 		AtmMachine atmMachine = new AtmMachine();
-
-		/*
-		 * String pattern1 = "[0-9]{4}"; String pattern2 = "[0-9]{8} [0-4]{4} [0-4]{4}";
-		 * String pattern3 = "[0-9]{3} [0-1]{3}"; String pattern4 = "B"; String pattern5
-		 * = "W [0-9]{3}";
-		 */
-
+		
 		// while loop to be inserted here to go through file and call the correct
 		// classes at each line
 		try {
@@ -76,7 +69,8 @@ public class ATM {
 
 								// need to add condition for blank line
 								// also stepping into userInteraction with the atm(balance , withdrawal)
-								while (sc.hasNextLine()) { // need to add condition for an empty line
+								// need to add condition for an empty line
+								while (sc.hasNextLine()) { 
 									String userSessionline = sc.nextLine();
 									String[] userInteractionArr = userSessionline.split(" ");
 									if (userInteractionArr[0].equals("B")) {
@@ -118,23 +112,3 @@ public class ATM {
 	}
 }
 
-/*
- * if (firstLine.matches(pattern1)) { int balance = Integer.parseInt(firstLine);
- * atmMachine.setBalance(balance); atmTC.atmTransaction(firstLine, balance);
- * 
- * while (sc.hasNextLine()) { String line = sc.nextLine();
- * 
- * if (line.matches(pattern2)) { atmMachine.setBalance(balance); String
- * userAccountLine = sc.nextLine(); // works
- * 
- * String balButton = sc.nextLine(); String withdrawal = sc.nextLine();
- * 
- * int userBalance = Integer.parseInt(userAccountLine);
- * userAccount.setBalance(userBalance);
- * 
- * details.accountDetails(line, balance, userBalance, balButton, withdrawal); //
- * possibly 3 arguements } else if (line.matches(pattern3)) {
- * overdraft.draft(line, balance); // } // else if(line.matches(pattern4)) { //
- * bal.balance(line, balance); } // else if(line.matches(pattern5)) { //
- * w.withDrawal(line, balance); // } } }
- */
