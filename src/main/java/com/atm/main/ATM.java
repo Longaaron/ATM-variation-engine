@@ -27,7 +27,7 @@ public class ATM {
 		AtmOverdraft overdraft = new AtmOverdraft();
 		AtmBalance bal = new AtmBalance();
 		AtmMachine atmMachine = new AtmMachine();
-		
+
 		// while loop to be inserted here to go through file and call the correct
 		// classes at each line
 		try {
@@ -70,7 +70,7 @@ public class ATM {
 								// need to add condition for blank line
 								// also stepping into userInteraction with the atm(balance , withdrawal)
 								// need to add condition for an empty line
-								while (sc.hasNextLine()) { 
+								while (sc.hasNextLine()) {
 									String userSessionline = sc.nextLine();
 									String[] userInteractionArr = userSessionline.split(" ");
 									if (userInteractionArr[0].equals("B")) {
@@ -82,19 +82,21 @@ public class ATM {
 										if (atmMachine.getBalance() != 0
 												&& atmMachine.getBalance() >= withDrawalAmount) {
 											if (withDrawalAmount <= userBalance) {
-												int newUserBalance = userAccount.getBalance() - withDrawalAmount;
-												int newAtmBalance = atmMachine.getBalance() - withDrawalAmount;
-												userAccount.setBalance(newUserBalance);
-												atmMachine.setBalance(newAtmBalance);
+												userBalance = userAccount.getBalance() - withDrawalAmount;
+												atmBalance = atmMachine.getBalance() - withDrawalAmount;
+												userAccount.setBalance(userBalance);
+												atmMachine.setBalance(atmBalance);
 
-												System.out.println(newUserBalance);
-												//System.out.println(atmMachine.getBalance());
+												System.out.println(userBalance);
+												// System.out.println(atmMachine.getBalance());
 											} else {
 												System.out.println(AtmError.FUNDS_ERR.getEnumDes());
 											}
 										} else {
 											System.out.println(AtmError.ATM_ERR.getEnumDes());
 										}
+									} else if (userSessionline.isEmpty()) {
+										break;
 									}
 								}
 
@@ -111,4 +113,3 @@ public class ATM {
 		}
 	}
 }
-
