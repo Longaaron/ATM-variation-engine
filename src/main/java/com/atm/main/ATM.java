@@ -87,8 +87,8 @@ public class ATM {
 												userAccount.setBalance(newUserBalance);
 												atmMachine.setBalance(newAtmBalance);
 
-												System.out.println(userAccount.getBalance());
-												System.out.println(atmMachine.getBalance());
+												System.out.println(newUserBalance);
+												//System.out.println(atmMachine.getBalance());
 											} else {
 												System.out.println(AtmError.FUNDS_ERR.getEnumDes());
 											}
