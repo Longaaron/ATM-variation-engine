@@ -22,9 +22,6 @@ public class ATM {
 
 		// CommandLine commandLineArgs = this.parseCommandlineoptions(args);
 		String fileName = args[0];
-		AtmTotalAmount atmTC = new AtmTotalAmount();
-		UserSession details = new UserSession();
-		AtmOverdraft overdraft = new AtmOverdraft();
 		AtmBalance bal = new AtmBalance();
 		AtmMachine atmMachine = new AtmMachine();
 
@@ -64,6 +61,8 @@ public class ATM {
 								int userBalance = Integer.parseInt(userBalanceArr[0]);
 								int userOverdraft = Integer.parseInt(userBalanceArr[1]);
 
+								userBalance = userBalance + userOverdraft;
+
 								userAccount.setBalance(userBalance);
 								userAccount.setOverDraft(userOverdraft);
 
@@ -86,9 +85,7 @@ public class ATM {
 												atmBalance = atmMachine.getBalance() - withDrawalAmount;
 												userAccount.setBalance(userBalance);
 												atmMachine.setBalance(atmBalance);
-
 												System.out.println(userBalance);
-												// System.out.println(atmMachine.getBalance());
 											} else {
 												System.out.println(AtmError.FUNDS_ERR.getEnumDes());
 											}
@@ -99,7 +96,6 @@ public class ATM {
 										break;
 									}
 								}
-
 							}
 						} else {
 							System.out.println(AtmError.ACCOUNT_ERR.getEnumDes());
