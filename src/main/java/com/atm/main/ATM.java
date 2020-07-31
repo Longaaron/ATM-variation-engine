@@ -87,11 +87,11 @@ public class ATM {
 												atmMachine.setBalance(atmBalance);
 												System.out.println(userBalance);
 												
-												if(userBalance == 0) {
-													userBalance = userAccount.getOverDraft();
+												// quick validation, when userBalance hits 0, overdraft will be included allowing user to take out the overdraft value
+												if(userBalance == 0 && userAccount.getOverDraft() != 0) {
+													userBalance = userAccount.getOverDraft();													
 													userAccount.setBalance(userBalance);
-													
-													System.out.println(userAccount.getBalance());
+													userAccount.setOverDraft(0);
 												}
 											} else {
 												System.out.println(AtmError.FUNDS_ERR.getEnumDes());
