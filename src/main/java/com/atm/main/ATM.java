@@ -24,6 +24,10 @@ public class ATM {
 		String fileName = args[0];
 		AtmBalance bal = new AtmBalance();
 		AtmMachine atmMachine = new AtmMachine();
+		
+		final String balance = "B";
+		final String withdraw = "W";
+		
 
 		// while loop to be inserted here to go through file and call the correct
 		// classes at each line
@@ -72,9 +76,9 @@ public class ATM {
 								while (sc.hasNextLine()) {
 									String userSessionline = sc.nextLine();
 									String[] userInteractionArr = userSessionline.split(" ");
-									if (userInteractionArr[0].equals("B")) {
+									if (userInteractionArr[0].equals(balance)) {
 										bal.balance(atmMachine, userAccount);
-									} else if (userInteractionArr[0].equals("W")) {
+									} else if (userInteractionArr[0].equals(withdraw)) {
 										int withDrawalAmount = Integer.parseInt(userInteractionArr[1]);
 										// check if atm has enough money to withdraw cash
 										// user cant withdraw more funds then they actually have
