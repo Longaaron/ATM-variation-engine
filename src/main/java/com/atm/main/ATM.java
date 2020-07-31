@@ -61,7 +61,7 @@ public class ATM {
 								int userBalance = Integer.parseInt(userBalanceArr[0]);
 								int userOverdraft = Integer.parseInt(userBalanceArr[1]);
 
-								userBalance = userBalance + userOverdraft;
+								//userBalance = userBalance + userOverdraft;
 
 								userAccount.setBalance(userBalance);
 								userAccount.setOverDraft(userOverdraft);
@@ -86,6 +86,13 @@ public class ATM {
 												userAccount.setBalance(userBalance);
 												atmMachine.setBalance(atmBalance);
 												System.out.println(userBalance);
+												
+												if(userBalance == 0) {
+													userBalance = userAccount.getOverDraft();
+													userAccount.setBalance(userBalance);
+													
+													System.out.println(userAccount.getBalance());
+												}
 											} else {
 												System.out.println(AtmError.FUNDS_ERR.getEnumDes());
 											}
