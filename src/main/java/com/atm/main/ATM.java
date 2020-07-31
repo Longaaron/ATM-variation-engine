@@ -69,10 +69,9 @@ public class ATM {
 
 								userAccount.setBalance(userBalance);
 								userAccount.setOverDraft(userOverdraft);
-
-								// need to add condition for blank line
+							
 								// also stepping into userInteraction with the atm(balance , withdrawal)
-								// need to add condition for an empty line
+								// while loop which covers the userSession for balance and withdrawls
 								while (sc.hasNextLine()) {
 									String userSessionline = sc.nextLine();
 									String[] userInteractionArr = userSessionline.split(" ");
@@ -103,6 +102,7 @@ public class ATM {
 										} else {
 											System.out.println(AtmError.ATM_ERR.getEnumDes());
 										}
+										//condition to break out of while loop for an empty line
 									} else if (userSessionline.isEmpty()) {
 										break;
 									}
