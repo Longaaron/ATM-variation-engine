@@ -38,7 +38,7 @@ public class ATM {
 			if (firstLineValueArr.length == 1) {
 				int atmBalance = Integer.parseInt(firstLineValueArr[0]); // try bl9ck
 				atmMachine.setBalance(atmBalance);
-				
+
 				while (sc.hasNextLine()) {
 					String line = sc.nextLine();
 					String[] userSessionLineArr = line.split(" ");
@@ -62,7 +62,7 @@ public class ATM {
 
 								userAccount.setBalance(userBalance);
 								userAccount.setOverDraft(userOverdraft);
-								userAccount.setCombinedTotal(userBalance + userOverdraft); 
+								userAccount.setCombinedTotal(userBalance + userOverdraft);
 
 								boolean userActiveSession = false;
 								while (!userActiveSession) {
@@ -80,18 +80,30 @@ public class ATM {
 											// user cant withdraw more funds then they actually have
 											if (atmMachine.getBalance() != 0
 													&& atmMachine.getBalance() >= withDrawalAmount) {
-												if (withDrawalAmount <= combinedBalanceOverdraft ) {
+												if (withDrawalAmount <= combinedBalanceOverdraft) {
+													if(userAccount.getBalance() >= withDrawalAmount) {
+														userBalance = userAccount.getBalance() - withDrawalAmount;
+													}
+													else {
+														userBalance = userAccount.getCombinedTotal() - withDrawalAmount;
+													}
 													
-													userBalance = userAccount.getCombinedTotal() - withDrawalAmount;
 													atmBalance = atmMachine.getBalance() - withDrawalAmount;
-													combinedBalanceOverdraft = userAccount.getCombinedTotal() - withDrawalAmount;
-													
+													combinedBalanceOverdraft = userAccount.getCombinedTotal()
+															- withDrawalAmount;
+                                                   
 													userAccount.setBalance(userBalance);
 													userAccount.setCombinedTotal(combinedBalanceOverdraft);
 													atmMachine.setBalance(atmBalance);
-													
-													//System.out.println(combinedBalanceOverdraft);
-													System.out.println(userBalance);
+
+													 if(userBalance <= 0 && userAccount.getOverDraft() > 0) {
+														 System.out.println("You have activated your Overdraft. Your Total  is: $" + userAccount.getOverDraft());
+	                                                    // userAccount.setOverDraft(withDrawalAmount - userAccount.getOverDraft());
+	                                                    // System.out.println(userAccount.getOverDraft()); 
+													 }
+													 else {
+														 System.out.println(userBalance); 
+													 }
 												} else {
 													System.out.println(AtmError.FUNDS_ERR.getEnumDes());
 												}
