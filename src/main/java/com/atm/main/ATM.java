@@ -72,7 +72,7 @@ public class ATM {
 										userActiveSession = !userActiveSession;
 									} else {
 										if (Constants.ATM_BALANCE.equals(userInteractionArr[0])) {
-											System.out.println(userAccount.getBalance());
+											System.out.println("$" + userAccount.getBalance());
 										} else if (Constants.ATM_WITHDRAWAL.equals(userInteractionArr[0])) {
 											int withDrawalAmount = Integer.parseInt(userInteractionArr[1]);
 											int combinedBalanceOverdraft = userAccount.getCombinedTotal();
@@ -81,29 +81,31 @@ public class ATM {
 											if (atmMachine.getBalance() != 0
 													&& atmMachine.getBalance() >= withDrawalAmount) {
 												if (withDrawalAmount <= combinedBalanceOverdraft) {
-													if(userAccount.getBalance() >= withDrawalAmount) {
+													if (userAccount.getBalance() >= withDrawalAmount) {
 														userBalance = userAccount.getBalance() - withDrawalAmount;
-													}
-													else {
+													} else {
 														userBalance = userAccount.getCombinedTotal() - withDrawalAmount;
 													}
-													
+
 													atmBalance = atmMachine.getBalance() - withDrawalAmount;
 													combinedBalanceOverdraft = userAccount.getCombinedTotal()
 															- withDrawalAmount;
-                                                   
+
 													userAccount.setBalance(userBalance);
 													userAccount.setCombinedTotal(combinedBalanceOverdraft);
 													atmMachine.setBalance(atmBalance);
 
-													 if(userBalance <= 0 && userAccount.getOverDraft() > 0) {
-														 System.out.println("You have activated your Overdraft. Your Total  is: $" + userAccount.getOverDraft());
-	                                                    // userAccount.setOverDraft(withDrawalAmount - userAccount.getOverDraft());
-	                                                    // System.out.println(userAccount.getOverDraft()); 
-													 }
-													 else {
-														 System.out.println(userBalance); 
-													 }
+													if (userBalance <= 0 && userAccount.getOverDraft() > 0
+															&& userAccount.getCombinedTotal() != 0) {
+														System.out.println("Available cash including overdraft: " + "$"
+																+ userAccount.getCombinedTotal());
+													} else if (userBalance != 0) {
+														System.out.println("$" + userAccount.getBalance()
+																+ " remaining in your main account");
+													} else {
+														System.out.println("$" + userAccount.getCombinedTotal()
+																+ " remaining in your overdraft");
+													}
 												} else {
 													System.out.println(AtmError.FUNDS_ERR.getEnumDes());
 												}
