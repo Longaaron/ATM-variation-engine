@@ -84,8 +84,10 @@ public class ATM {
 													if (userAccount.getBalance() >= withDrawalAmount) {
 														userBalance = userAccount.getBalance() - withDrawalAmount;
 													} else {
-														userBalance = userAccount.getCombinedTotal() - withDrawalAmount;
+														userAccount.setBalance(0);
+														int remainingUserBalance = userAccount.getCombinedTotal() - withDrawalAmount;
 													}
+													int remainingUserBalance = userAccount.getCombinedTotal() - withDrawalAmount;
 
 													atmBalance = atmMachine.getBalance() - withDrawalAmount;
 													combinedBalanceOverdraft = userAccount.getCombinedTotal()
@@ -99,7 +101,7 @@ public class ATM {
 															&& userAccount.getCombinedTotal() != 0) {
 														System.out.println("Available cash including overdraft: " + "$"
 																+ userAccount.getCombinedTotal());
-													} else if (userBalance != 0) {
+													} else if (remainingUserBalance != 0) {
 														System.out.println("$" + userAccount.getBalance()
 																+ " remaining in your main account");
 													} else {
