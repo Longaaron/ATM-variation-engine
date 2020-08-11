@@ -85,7 +85,6 @@ public class ATM {
 														userBalance = userAccount.getBalance() - withDrawalAmount;
 													} else {
 														userAccount.setBalance(0);
-														int remainingUserBalance = userAccount.getCombinedTotal() - withDrawalAmount;
 													}
 													int remainingUserBalance = userAccount.getCombinedTotal() - withDrawalAmount;
 
