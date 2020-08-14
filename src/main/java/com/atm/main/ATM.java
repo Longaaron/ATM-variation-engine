@@ -66,9 +66,12 @@ public class ATM {
 
 								boolean userActiveSession = false;
 								while (!userActiveSession) {
-									String userSessionline = sc.nextLine();
-									String[] userInteractionArr = userSessionline.split(" ");
-									if (userInteractionArr[0].length() == 0) {
+									String userSessionline;
+									String[] userInteractionArr;
+									if(sc.hasNextLine()) {
+										userSessionline = sc.nextLine();
+										userInteractionArr = userSessionline.split(" ");
+									if (userSessionline != null && userInteractionArr[0].length() == 0) {
 										userActiveSession = !userActiveSession;
 									} else {
 										if (Constants.ATM_BALANCE.equals(userInteractionArr[0])) {
@@ -100,12 +103,14 @@ public class ATM {
 															&& userAccount.getCombinedTotal() != 0) {
 														System.out.println("Available cash including overdraft: " + "$"
 																+ userAccount.getCombinedTotal());
+														userAccount.setOverDraft(withDrawalAmount - userAccount.getCombinedTotal());
 													} else if (remainingUserBalance != 0) {
 														System.out.println("$" + userAccount.getBalance()
-																+ " remaining in your main account");
+																+ " remaining in your main account");													
 													} else {
 														System.out.println("$" + userAccount.getCombinedTotal()
 																+ " remaining in your overdraft");
+														userAccount.setOverDraft(userAccount.getCombinedTotal() - withDrawalAmount);
 													}
 												} else {
 													System.out.println(AtmError.FUNDS_ERR.getEnumDes());
@@ -115,6 +120,7 @@ public class ATM {
 											}
 										}
 									}
+								  }
 								}
 							} else {
 								System.out.println(AtmError.ACCOUNT_ERR.getEnumDes());
