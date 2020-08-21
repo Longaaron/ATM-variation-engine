@@ -25,7 +25,7 @@ public class ATM {
 		String fileName = args[0];
 		AtmBalance bal = new AtmBalance();
 		AtmMachine atmMachine = new AtmMachine();
-
+		
 		try {
 			File f = new File(fileName);
 			Scanner sc = new Scanner(f);
@@ -74,8 +74,12 @@ public class ATM {
 									if (userSessionline != null && userInteractionArr[0].length() == 0) {
 										userActiveSession = !userActiveSession;
 									} else {
+										
+										// if B appears then balance 
 										if (Constants.ATM_BALANCE.equals(userInteractionArr[0])) {
 											System.out.println("$" + userAccount.getBalance());
+											
+											// if W appears then withdraw
 										} else if (Constants.ATM_WITHDRAWAL.equals(userInteractionArr[0])) {
 											int withDrawalAmount = Integer.parseInt(userInteractionArr[1]);
 											int combinedBalanceOverdraft = userAccount.getCombinedTotal();
@@ -83,12 +87,19 @@ public class ATM {
 											// user cant withdraw more funds then they actually have
 											if (atmMachine.getBalance() != 0
 													&& atmMachine.getBalance() >= withDrawalAmount) {
+												
+												// if the user wants to take out money and its less then their combined total then continue, else error
 												if (withDrawalAmount <= combinedBalanceOverdraft) {
+													
+													//if user balance is greater then the amount that the user wants to withdraw then you subtract that amount away
+													// else if the amount is greater than the balance remaining, set balance to zero and bring overdraft into play
 													if (userAccount.getBalance() >= withDrawalAmount) {
 														userBalance = userAccount.getBalance() - withDrawalAmount;
 													} else {
 														userAccount.setBalance(0);
 													}
+													
+													// setting the overall remaining balance that user can withdraw
 													int remainingUserBalance = userAccount.getCombinedTotal() - withDrawalAmount;
 
 													atmBalance = atmMachine.getBalance() - withDrawalAmount;
@@ -99,11 +110,16 @@ public class ATM {
 													userAccount.setCombinedTotal(combinedBalanceOverdraft);
 													atmMachine.setBalance(atmBalance);
 
+													// if user balance is 0 or goes below zero 
+													// if there is an overdraft
+													// if combined total is not empty
 													if (userBalance <= 0 && userAccount.getOverDraft() > 0
 															&& userAccount.getCombinedTotal() != 0) {
 														System.out.println("Available cash including overdraft: " + "$"
 																+ userAccount.getCombinedTotal());
 														userAccount.setOverDraft(withDrawalAmount - userAccount.getCombinedTotal());
+														
+													// if remaining balance is not empty
 													} else if (remainingUserBalance != 0) {
 														System.out.println("$" + userAccount.getBalance()
 																+ " remaining in your main account");													
@@ -133,5 +149,12 @@ public class ATM {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static int getCombinedTotal(UserAccount userAccount) {
+		
+		int totalUserBalance = userAccount.getBalance() + userAccount.getOverDraft();
+		
+		return totalUserBalance;
 	}
 }
