@@ -6,7 +6,6 @@ public class UserAccount {
 	String accountPin;
 	int balance;
 	int overDraft;
-	int combinedTotal;
 	
 	public String getAccountNumber() {
 		return accountNumber;
@@ -34,11 +33,7 @@ public class UserAccount {
 	}
 	
 	public int getCombinedTotal() {
-		return combinedTotal;
+		return balance + overDraft;
 	}
-	public void setCombinedTotal(int combinedTotal) {
-		this.combinedTotal = combinedTotal;
-	}
-	
 
 }
