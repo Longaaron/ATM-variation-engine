@@ -71,7 +71,7 @@ public class ATM {
 									if (sc.hasNextLine()) {
 										userSessionline = sc.nextLine();
 										userInteractionArr = userSessionline.split(" ");
-										if (userSessionline != null && userInteractionArr[0].length() == 0) {
+										 if (userSessionline == null || userInteractionArr.length == 0 || userSessionline.isEmpty()) {
 											userActiveSession = !userActiveSession;
 										} else {
 
@@ -142,7 +142,7 @@ public class ATM {
 														} else if (userBalance != 0) {
 															System.out.println("$" + userAccount.getBalance()
 																	+ " remaining in your main account");
-														} else if(userAccount.getOverDraft() != 0) {
+														} else if(userAccount.getOverDraft() != 0 || userAccount.getOverDraft() == 0) {
 															System.out.println("$" + userAccount.getCombinedTotal()
 																	+ " remaining in your overdraft");
 															userAccount.setOverDraft(
@@ -158,7 +158,9 @@ public class ATM {
 												System.out.println(AtmError.ATM_ERR.getEnumDes());
 											}
 										}
-									} // Causes an infinite loop due to sc.hasNextLine
+									} else {
+										 userActiveSession = true;// Causes an infinite loop due to sc.hasNextLine
+									}
 								} // WHILE loop
 							} else {
 								System.out.println(AtmError.ACCOUNT_ERR.getEnumDes());
@@ -184,3 +186,8 @@ public class ATM {
 		return totalUserBalance;
 	}
 }
+
+
+
+
+
