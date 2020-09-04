@@ -1,5 +1,5 @@
 package resources;
 
-public interface atmInterface {
+public interface atmInterface{
 
 }
