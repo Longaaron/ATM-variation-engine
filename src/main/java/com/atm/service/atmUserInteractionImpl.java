@@ -5,6 +5,13 @@ import com.atm.datamodel.AtmMachine;
 import com.atm.datamodel.UserAccount;
 
 public class atmUserInteractionImpl implements atmUserInteraction {
+	
+	/*
+	 * An interface implementation that acts as the processing unit for the users interaction with the ATM.
+	 * methods for both balance and withDrawal.
+	 * BALANCE consisting of a simple print out.
+	 * WITHDRAWAL consisting of complicated accounting calculations that must take account of the various angles a user can take when accessing their account.
+	 */
 
 	public void processBalance(UserAccount userAccount) {
 		System.out.println("$" + userAccount.getBalance());

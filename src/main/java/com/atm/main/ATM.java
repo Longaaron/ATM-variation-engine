@@ -23,6 +23,11 @@ public class ATM {
 	public static void main(String[] args) throws IOException {
 
 		// CommandLine commandLineArgs = this.parseCommandlineoptions(args);
+		
+		/*
+		 * Simple main class.
+		 * Providing a input file, allowing the interface classes to get called and processed.
+		*/
 		String fileName = args[0];
 		atmServiceImpl atmServiceImpl = new atmServiceImpl();
 		atmServiceImpl.processFile(fileName);

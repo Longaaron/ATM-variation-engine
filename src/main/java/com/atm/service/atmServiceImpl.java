@@ -11,6 +11,17 @@ import com.atm.datamodel.UserAccount;
 import com.atm.main.AtmBalance;
 
 public class atmServiceImpl implements atmService {
+	
+	/*
+	 * An interface implementation class that works off of atmService.java. Getting information from the processed file.
+	 * Within this file, the biggest chunk of the processing side of things takes place.
+	 * Here the file is firstly passed through the method allowing it to be accessed.
+	 * Following that, there is various different if statements that will check each line of the file while its being processed to determine the following actions required.
+	 * 
+	 * After the file has successfully made it through the first few initial checks, the file then will be passed down into the userInteraction section of the code.
+	 * Here, there are checks for the two types of interactions available for the user. These are both balance and withdrawal.
+	 * With balance and withdrawal, the code to process the files are located in atmUserInteractionImpl.java.
+	 */
 
 	public void processFile(String fileName) {
 		// TODO Auto-generated method stub
