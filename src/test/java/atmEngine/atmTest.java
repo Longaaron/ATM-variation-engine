@@ -2,6 +2,7 @@ package atmEngine;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.atm.datamodel.AtmMachine;
@@ -13,6 +14,12 @@ public class atmTest{
 	
 	AtmMachine atmMachine = new AtmMachine();
 	UserAccount userAccount = new UserAccount();
+	
+	@Before
+	public void beforeFunction() {
+		String accountNumber = userAccount.setAccountNumber("17222478");
+		String testPin = (userAccount.setAccountPin("1234"));
+	}
 
 	@Test
 	public void testIfAccountNumberIsNotNull() {
@@ -29,6 +36,12 @@ public class atmTest{
 	}
 	
 	@Test
+	public void testIfPinLengthIsCorrect() {
+		String checkPin = userAccount.getAccountPin();
+		assertEquals(4, checkPin.length());
+	}
+	
+	@Test
 	public void testIfPinNumberIsNotNull() {
 		String checkPin = userAccount.getAccountPin();
 		assertNotNull(checkPin, "pin entered is null");
@@ -36,9 +49,8 @@ public class atmTest{
 	
 	@Test
 	public void testIfPinIsEqual() {
-		String userEnteredPin = userAccount.getAccountPin();
 		
-		//assertEquals("need to figure how to get array from other class maybe", userEnteredPin);
+		assertEquals(userAccount.getAccountPin(), "1234");
 	}
 	
 	@Test

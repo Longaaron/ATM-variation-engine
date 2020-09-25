@@ -10,14 +10,14 @@ public class UserAccount {
 	public String getAccountNumber() {
 		return accountNumber;
 	}
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
+	public String setAccountNumber(String accountNumber) {
+		return this.accountNumber = accountNumber;
 	}
 	public String getAccountPin() {
 		return accountPin;
 	}
-	public void setAccountPin(String correctPin) {
-		this.accountPin = correctPin;
+	public String setAccountPin(String correctPin) {
+		return this.accountPin = correctPin;
 	}
 	public int getBalance() {
 		return balance;
