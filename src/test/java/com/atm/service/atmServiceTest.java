@@ -1,4 +1,4 @@
-package atmEngine;
+package com.atm.service;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,7 @@ import com.atm.datamodel.UserAccount;
 import com.atm.service.atmServiceImpl;
 import com.atm.service.atmUserInteractionImpl;
 
-public class atmTest{
+public class atmServiceTest{
 	
 	AtmMachine atmMachine = new AtmMachine();
 	UserAccount userAccount = new UserAccount();
