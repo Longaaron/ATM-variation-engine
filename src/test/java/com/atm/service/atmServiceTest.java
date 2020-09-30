@@ -14,23 +14,22 @@ public class atmServiceTest{
 	
 	AtmMachine atmMachine = new AtmMachine();
 	UserAccount userAccount = new UserAccount();
+	atmService atmService = new atmServiceImpl();
 	
 	@Before
 	public void beforeFunction() {
-		String accountNumber = userAccount.setAccountNumber("17222478");
-		String testPin = (userAccount.setAccountPin("1234"));
+		userAccount.setAccountNumber("17222478");
+		userAccount.setAccountPin("1234");
 	}
 
 	@Test
 	public void testIfAccountNumberIsNotNull() {
-		String accountNumber = userAccount.getAccountNumber();
-		
-		assertNotNull(accountNumber, "account Number is null");		
-		//assertNull(accountNumber, "account number is not null");
+		//String accountNumber = null;		
+		assertNotNull("account Number is null", userAccount.getAccountNumber());				
 	}
 	
 	@Test
-	public void testIfLengthIsCorrect() {
+	public void testIfAccountNumberLengthIsCorrect() {
 		String accountNumber = userAccount.getAccountNumber();		
 		assertEquals(8, accountNumber.length());
 	}
@@ -43,13 +42,11 @@ public class atmServiceTest{
 	
 	@Test
 	public void testIfPinNumberIsNotNull() {
-		String checkPin = userAccount.getAccountPin();
-		assertNotNull(checkPin, "pin entered is null");
+		assertNotNull("pin entered is null", userAccount.getAccountPin());
 	}
 	
 	@Test
-	public void testIfPinIsEqual() {
-		
+	public void testIfPinIsEqual() {		
 		assertEquals(userAccount.getAccountPin(), "1234");
 	}
 	
@@ -64,5 +61,13 @@ public class atmServiceTest{
 		int atmBalance = atmMachine.getBalance();	
 		assertNotNull(atmBalance);
 	}
+	
+	//public void processFile(String fileName);
+	
+	/*@Test
+	public void processFileTestCase1() {
+		atmService.processFile(fileName);		
+	}
+	*/
 
 }

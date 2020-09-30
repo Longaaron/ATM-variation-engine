@@ -8,7 +8,7 @@ import com.atm.common.AtmError;
 import com.atm.common.Constants;
 import com.atm.datamodel.AtmMachine;
 import com.atm.datamodel.UserAccount;
-import com.atm.main.AtmBalance;
+
 
 public class atmServiceImpl implements atmService {
 	
@@ -25,7 +25,7 @@ public class atmServiceImpl implements atmService {
 
 	public void processFile(String fileName) {
 		// TODO Auto-generated method stub
-		AtmBalance bal = new AtmBalance();
+		
 		AtmMachine atmMachine = new AtmMachine();
 		atmUserInteractionImpl atmUserInteraction = new atmUserInteractionImpl();
 
@@ -99,13 +99,13 @@ public class atmServiceImpl implements atmService {
 									}
 								} // WHILE loop
 							} else {
-								System.out.println(AtmError.ACCOUNT_ERR.getEnumDes());
+								//System.out.println(AtmError.ACCOUNT_ERR.getEnumDes());
 							}
 						} else {
 							System.out.println(AtmError.PIN_ERROR.getEnumDes());
 						}
 					} else {
-						System.out.println(AtmError.ACCOUNT_ERR.getEnumDes());
+						//System.out.println(AtmError.ACCOUNT_ERR.getEnumDes());
 					}
 				} // WHILE LOOP
 				sc.close();
