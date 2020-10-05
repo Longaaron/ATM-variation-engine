@@ -35,5 +35,9 @@ public class UserAccount {
 	public int getCombinedTotal() {
 		return balance + overDraft;
 	}
+	
+	public int returnBalance() {
+		return balance;
+	}
 
 }
