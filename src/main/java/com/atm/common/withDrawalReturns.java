@@ -29,10 +29,6 @@ public class withDrawalReturns {
 		return this.newBalance = userAccount.getBalance() - withDrawalAmount;
 	}
 
-	public int getBalance() {
-		return userAccount.getBalance();
-	}
-
 	public UserAccount getUserAccount() {
 		return userAccount;
 	}
@@ -40,11 +36,6 @@ public class withDrawalReturns {
 	public AtmMachine getAtmMachineValues() {
 		return atmMachine;
 	}
-
-	public int getUserBalance() {
-		return userAccount.getBalance();
-	}
-
 	public AtmError potentialErrorOutput1() {
 		return AtmError.ACCOUNT_ERR;
 	}
