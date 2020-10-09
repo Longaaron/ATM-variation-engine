@@ -1,6 +1,7 @@
 package com.atm.service;
 
 import com.atm.common.AtmError;
+import com.atm.common.withDrawalReturns;
 import com.atm.datamodel.AtmMachine;
 import com.atm.datamodel.UserAccount;
 
@@ -13,13 +14,14 @@ public class atmUserInteractionImpl implements atmUserInteraction {
 	 * WITHDRAWAL consisting of complicated accounting calculations that must take account of the various angles a user can take when accessing their account.
 	 */
 
-	public void processBalance(UserAccount userAccount) {
+	public UserAccount processBalance(UserAccount userAccount) {
 		System.out.println("$" + userAccount.getBalance());
+		return userAccount;
 	}
 
-	public void processWithdrawal(UserAccount userAccount, AtmMachine atmMachine, int withDrawalAmount, int userBalance,
-			int atmBalance) {
+	public withDrawalReturns processWithdrawal(UserAccount userAccount, AtmMachine atmMachine, int withDrawalAmount, int userBalance, int atmBalance) {
 		int combinedBalanceOverdraft = userAccount.getCombinedTotal();
+		withDrawalReturns wdReturns = new withDrawalReturns();
 		// check if atm has enough money to withdraw cash
 		// user cant withdraw more funds then they actually have
 		if (atmMachine.getBalance() != 0 && atmMachine.getBalance() >= withDrawalAmount) {
@@ -64,5 +66,6 @@ public class atmUserInteractionImpl implements atmUserInteraction {
 			}
 
 		}
+		return wdReturns;
 	}
 }
